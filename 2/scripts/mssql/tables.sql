@@ -1,4 +1,5 @@
 create database warehouse_rental
+create database QGISLAB
 
 use warehouse_rental;
 go
@@ -6,7 +7,7 @@ go
 create table [User] (
     UserID int primary key identity(1,1),
     Login varchar(30) unique not null,
-        Password varchar(255) not null,
+    Password varchar(255) not null,
     Name nvarchar(50) not null,
     ContactInformation nvarchar(255) not null
 );
