@@ -3,17 +3,17 @@ create or replace procedure CreateUser (
     p_Password IN varchar2,
     p_Name IN nvarchar2,
     p_ContactInformation IN nvarchar2,
-    p_NewUserID OUT int
+    p_NewUserID OUT number
 ) as
 begin
-    insert into "User" (Login, Password, Name, ContactInformation)
+    insert Into "User" (Login, Password, Name, ContactInformation)
     values (p_Login, p_Password, p_Name, p_ContactInformation)
     returning UserID into p_NewUserID;
 end;
 /
 
 create or replace procedure GetUser (
-    p_UserID IN int
+    p_UserID IN number
 ) as
 begin
     select * from "User" where UserID = p_UserID;
@@ -21,7 +21,7 @@ end;
 /
 
 create or replace procedure UpdateUser (
-    p_UserID IN int,
+    p_UserID IN number,
     p_Login IN varchar2,
     p_Password IN varchar2,
     p_Name IN nvarchar2,
@@ -38,7 +38,7 @@ end;
 /
 
 create or replace procedure DeleteUser (
-    p_UserID IN int
+    p_UserID IN number
 ) as
 begin
     delete from "User" where UserID = p_UserID;
@@ -46,8 +46,8 @@ end;
 /
 
 create or replace procedure CreateLandlord (
-    p_UserID IN int,
-    p_NewLandlordID OUT int
+    p_UserID IN number,
+    p_NewLandlordID OUT number
 ) as
 begin
     insert into Landlord (UserID) values (p_UserID)
@@ -56,7 +56,7 @@ end;
 /
 
 create or replace procedure GetLandlord (
-    p_LandlordID IN int
+    p_LandlordID IN number
 ) as
 begin
     select l.LandlordID, u.*
@@ -67,7 +67,7 @@ end;
 /
 
 create or replace procedure DeleteLandlord (
-    p_LandlordID IN int
+    p_LandlordID IN number
 ) as
 begin
     delete from Landlord where LandlordID = p_LandlordID;
@@ -75,8 +75,8 @@ end;
 /
 
 create or replace procedure CreateTenant (
-    p_UserID IN int,
-    p_NewTenantID OUT int
+    p_UserID IN number,
+    p_NewTenantID OUT number
 ) as
 begin
     insert into Tenant (UserID) values (p_UserID)
@@ -85,7 +85,7 @@ end;
 /
 
 create or replace procedure GetTenant (
-    p_TenantID IN int
+    p_TenantID IN number
 ) as
 begin
     select t.TenantID, u.*
@@ -96,7 +96,7 @@ end;
 /
 
 create or replace procedure DeleteTenant (
-    p_TenantID IN int
+    p_TenantID IN number
 ) as
 begin
     delete from Tenant where TenantID = p_TenantID;
@@ -104,21 +104,21 @@ end;
 /
 
 create or replace procedure CreateStorageRoom (
-    p_LandlordID IN int,
+    p_LandlordID IN number,
     p_Address IN nvarchar2,
     p_TransportHubs IN nvarchar2,
     p_InfrastructureNear IN nvarchar2,
-    p_TotalArea IN FLOAT,
-    p_RoomLength IN FLOAT,
-    p_RoomWidth IN FLOAT,
-    p_RoomHeight IN FLOAT,
-    p_AvailableArea IN FLOAT,
-    p_SpecificNeedsArea IN FLOAT,
-    p_RoomCooling IN boolean,
-    p_SunriseSide IN boolean,
-    p_Status IN boolean,
-    p_NewRoomID OUT int
-) as
+    p_TotalArea IN number,
+    p_RoomLength IN number,
+    p_RoomWidth IN number,
+    p_RoomHeight IN number,
+    p_AvailableArea IN number,
+    p_SpecificNeedsArea IN number,
+    p_RoomCooling IN number,
+    p_SunriseSide IN number,
+    p_Status IN number,
+    p_NewRoomID OUT number
+) is
 begin
     insert into StorageRoom (LandlordID, Address, TransportHubs, InfrastructureNear, TotalArea, RoomLength, RoomWidth, RoomHeight, AvailableArea, SpecificNeedsArea, RoomCooling, SunriseSide, Status)
     values (p_LandlordID, p_Address, p_TransportHubs, p_InfrastructureNear, p_TotalArea, p_RoomLength, p_RoomWidth, p_RoomHeight, p_AvailableArea, p_SpecificNeedsArea, p_RoomCooling, p_SunriseSide, p_Status)
@@ -126,8 +126,9 @@ begin
 end;
 /
 
+
 create or replace procedure GetStorageRoom (
-    p_RoomID IN int
+    p_RoomID IN number
 ) as
 begin
     select * from StorageRoom where RoomID = p_RoomID;
@@ -135,20 +136,20 @@ end;
 /
 
 create or replace procedure UpdateStorageRoom (
-    p_RoomID IN int,
+    p_RoomID IN number,
     p_Address IN nvarchar2,
     p_TransportHubs IN nvarchar2,
     p_InfrastructureNear IN nvarchar2,
-    p_TotalArea IN FLOAT,
-    p_RoomLength IN FLOAT,
-    p_RoomWidth IN FLOAT,
-    p_RoomHeight IN FLOAT,
-    p_AvailableArea IN FLOAT,
-    p_SpecificNeedsArea IN FLOAT,
-    p_RoomCooling IN boolean,
-    p_SunriseSide IN boolean,
-    p_Status IN boolean
-) as
+    p_TotalArea IN number,
+    p_RoomLength IN number,
+    p_RoomWidth IN number,
+    p_RoomHeight IN number,
+    p_AvailableArea IN number,
+    p_SpecificNeedsArea IN number,
+    p_RoomCooling IN number,
+    p_SunriseSide IN number,
+    p_Status IN number
+) is
 begin
     update StorageRoom
     set Address = p_Address,
@@ -168,7 +169,7 @@ end;
 /
 
 create or replace procedure DeleteStorageRoom (
-    p_RoomID IN int
+    p_RoomID IN number
 ) as
 begin
     delete from StorageRoom where RoomID = p_RoomID;
@@ -176,19 +177,20 @@ end;
 /
 
 create or replace procedure CreateAdditionalServices (
-    p_RoomID IN int,
-    p_HasSecurity IN boolean,
-    p_HasCleaning IN boolean,
-    p_HasRepairWork IN boolean
-) as
+    p_RoomID IN number,
+    p_HasSecurity IN number,
+    p_HasCleaning IN number,
+    p_HasRepairWork IN number
+) is
 begin
     insert into AdditionalServices (RoomID, HasSecurity, HasCleaning, HasRepairWork)
     values (p_RoomID, p_HasSecurity, p_HasCleaning, p_HasRepairWork);
 end;
 /
 
+
 create or replace procedure GetAdditionalServices (
-    p_RoomID IN int
+    p_RoomID IN number
 ) as
 begin
     select * from AdditionalServices where RoomID = p_RoomID;
@@ -196,11 +198,11 @@ end;
 /
 
 create or replace procedure UpdateAdditionalServices (
-    p_RoomID IN int,
-    p_HasSecurity IN boolean,
-    p_HasCleaning IN boolean,
-    p_HasRepairWork IN boolean
-) as
+    p_RoomID IN number,
+    p_HasSecurity IN number,
+    p_HasCleaning IN number,
+    p_HasRepairWork IN number
+) is
 begin
     update AdditionalServices
     set HasSecurity = p_HasSecurity,
@@ -210,8 +212,9 @@ begin
 end;
 /
 
+
 create or replace procedure DeleteAdditionalServices (
-    p_RoomID IN int
+    p_RoomID IN number
 ) as
 begin
     delete from AdditionalServices where RoomID = p_RoomID;
@@ -219,19 +222,19 @@ end;
 /
 
 create or replace procedure CreateRoomPicture (
-    p_RoomID IN int,
+    p_RoomID IN number,
     p_PictureLink IN nvarchar2,
-    p_NewRoomPictureID OUT int
+    p_NewRoomPictureID OUT number
 ) as
 begin
-    insert into RoomPicture (RoomID, PictureLink)
+    insert Into RoomPicture (RoomID, PictureLink)
     values (p_RoomID, p_PictureLink)
-    returning RoomPictureID into p_NewRoomPictureID;
+    returning RoomPictureID Into p_NewRoomPictureID;
 end;
 /
 
 create or replace procedure GetRoomPictures (
-    p_RoomID IN int
+    p_RoomID IN number
 ) as
 begin
     select * from RoomPicture where RoomID = p_RoomID;
@@ -239,7 +242,7 @@ end;
 /
 
 create or replace procedure UpdateRoomPicture (
-    p_RoomPictureID IN int,
+    p_RoomPictureID IN number,
     p_PictureLink IN nvarchar2
 ) as
 begin
@@ -250,7 +253,7 @@ end;
 /
 
 create or replace procedure DeleteRoomPicture (
-    p_RoomPictureID IN int
+    p_RoomPictureID IN number
 ) as
 begin
     delete from RoomPicture where RoomPictureID = p_RoomPictureID;
@@ -259,19 +262,19 @@ end;
 
 create or replace procedure CreateRentalPayment (
     p_MonthlyPayment IN FLOAT,
-    p_PaymentSchedule IN int,
-    p_PaymentMethod IN int,
-    p_NewRentalPaymentsID OUT int
+    p_PaymentSchedule IN number,
+    p_PaymentMethod IN number,
+    p_NewRentalPaymentsID OUT number
 ) as
 begin
-    insert into RentalPayments (MonthlyPayment, PaymentSchedule, PaymentMethod)
+    insert Into RentalPayments (MonthlyPayment, PaymentSchedule, PaymentMethod)
     values (p_MonthlyPayment, p_PaymentSchedule, p_PaymentMethod)
-    returning RentalPaymentsID into p_NewRentalPaymentsID;
+    returning RentalPaymentsID Into p_NewRentalPaymentsID;
 end;
 /
 
 create or replace procedure GetRentalPayment (
-    p_RentalPaymentsID IN int
+    p_RentalPaymentsID IN number
 ) as
 begin
     select * from RentalPayments where RentalPaymentsID = p_RentalPaymentsID;
@@ -279,10 +282,10 @@ end;
 /
 
 create or replace procedure UpdateRentalPayment (
-    p_RentalPaymentsID IN int,
+    p_RentalPaymentsID IN number,
     p_MonthlyPayment IN FLOAT,
-    p_PaymentSchedule IN int,
-    p_PaymentMethod IN int
+    p_PaymentSchedule IN number,
+    p_PaymentMethod IN number
 ) as
 begin
     update RentalPayments
@@ -294,7 +297,7 @@ end;
 /
 
 create or replace procedure DeleteRentalPayment (
-    p_RentalPaymentsID IN int
+    p_RentalPaymentsID IN number
 ) as
 begin
     delete from RentalPayments where RentalPaymentsID = p_RentalPaymentsID;
@@ -305,17 +308,17 @@ create or replace procedure CreateRentalPeriod (
     p_StartDate IN DATE,
     p_endDate IN DATE,
     p_PossibilityOfExtensions IN nvarchar2,
-    p_NewRentalPeriodID OUT int
+    p_NewRentalPeriodID OUT number
 ) as
 begin
-    insert into RentalPeriod (StartDate, endDate, PossibilityOfExtensions)
+    insert Into RentalPeriod (StartDate, endDate, PossibilityOfExtensions)
     values (p_StartDate, p_endDate, p_PossibilityOfExtensions)
-    returning RentalPeriodID into p_NewRentalPeriodID;
+    returning RentalPeriodID Into p_NewRentalPeriodID;
 end;
 /
 
 create or replace procedure GetRentalPeriod (
-    p_RentalPeriodID IN int
+    p_RentalPeriodID IN number
 ) as
 begin
     select * from RentalPeriod where RentalPeriodID = p_RentalPeriodID;
@@ -323,7 +326,7 @@ end;
 /
 
 create or replace procedure UpdateRentalPeriod (
-    p_RentalPeriodID IN int,
+    p_RentalPeriodID IN number,
     p_StartDate IN DATE,
     p_endDate IN DATE,
     p_PossibilityOfExtensions IN nvarchar2
@@ -338,7 +341,7 @@ end;
 /
 
 create or replace procedure DeleteRentalPeriod (
-    p_RentalPeriodID IN int
+    p_RentalPeriodID IN number
 ) as
 begin
     delete from RentalPeriod where RentalPeriodID = p_RentalPeriodID;
@@ -350,17 +353,17 @@ create or replace procedure CreateRentalCondition (
     p_ObligationsOfLandlord IN nvarchar2,
     p_ConditionsOfUseStorageFacilities IN nvarchar2,
     p_LiabilityDamages IN nvarchar2,
-    p_NewRentalConditionsID OUT int
+    p_NewRentalConditionsID OUT number
 ) as
 begin
-    insert into RentalConditions (ObligationsOfTenant, ObligationsOfLandlord, ConditionsOfUseStorageFacilities, LiabilityDamages)
+    insert Into RentalConditions (ObligationsOfTenant, ObligationsOfLandlord, ConditionsOfUseStorageFacilities, LiabilityDamages)
     values (p_ObligationsOfTenant, p_ObligationsOfLandlord, p_ConditionsOfUseStorageFacilities, p_LiabilityDamages)
-    returning RentalConditionsID into p_NewRentalConditionsID;
+    returning RentalConditionsID Into p_NewRentalConditionsID;
 end;
 /
 
 create or replace procedure GetRentalCondition (
-    p_RentalConditionsID IN int
+    p_RentalConditionsID IN number
 ) as
 begin
     select * from RentalConditions where RentalConditionsID = p_RentalConditionsID;
@@ -368,7 +371,7 @@ end;
 /
 
 create or replace procedure UpdateRentalCondition (
-    p_RentalConditionsID IN int,
+    p_RentalConditionsID IN number,
     p_ObligationsOfTenant IN nvarchar2,
     p_ObligationsOfLandlord IN nvarchar2,
     p_ConditionsOfUseStorageFacilities IN nvarchar2,
@@ -385,7 +388,7 @@ end;
 /
 
 create or replace procedure DeleteRentalCondition (
-    p_RentalConditionsID IN int
+    p_RentalConditionsID IN number
 ) as
 begin
     delete from RentalConditions where RentalConditionsID = p_RentalConditionsID;
@@ -393,23 +396,23 @@ end;
 /
 
 create or replace procedure CreateContractAgreement (
-    p_ContractNumber IN int,
-    p_LandlordID IN int,
-    p_TenantID IN int,
-    p_RoomID IN int,
-    p_RentalPeriodID IN int,
-    p_RentalPaymentsID IN int,
-    p_RentalConditionsID IN int,
-    p_DepositAmount IN int,
+    p_ContractNumber IN number,
+    p_LandlordID IN number,
+    p_TenantID IN number,
+    p_RoomID IN number,
+    p_RentalPeriodID IN number,
+    p_RentalPaymentsID IN number,
+    p_RentalConditionsID IN number,
+    p_DepositAmount IN number,
     p_TermsOfReturn IN nvarchar2,
     p_TermOfUse IN nvarchar2,
     p_DateOfConclusion IN DATE,
     p_DateOfEndConclusion IN DATE,
-    p_AmountOfFine IN int,
+    p_AmountOfFine IN number,
     p_TerminationConditions IN nvarchar2
 ) as
 begin
-    insert into ContractAgreement
+    insert Into ContractAgreement
     (ContractNumber, LandlordID, TenantID, RoomID, RentalPeriodID, RentalPaymentsID, RentalConditionsID,
      DepositAmount, TermsOfReturn, TermOfUse, DateOfConclusion, DateOfEndConclusion, AmountOfFine, TerminationConditions)
     values
@@ -419,7 +422,7 @@ end;
 /
 
 create or replace procedure GetContractAgreement (
-    p_ContractNumber IN int
+    p_ContractNumber IN number
 ) as
 begin
     select * from ContractAgreement where ContractNumber = p_ContractNumber;
@@ -427,12 +430,12 @@ end;
 /
 
 create or replace procedure UpdateContractAgreement (
-    p_ContractNumber IN int,
-    p_DepositAmount IN int,
+    p_ContractNumber IN number,
+    p_DepositAmount IN number,
     p_TermsOfReturn IN nvarchar2,
     p_TermOfUse IN nvarchar2,
     p_DateOfEndConclusion IN DATE,
-    p_AmountOfFine IN int,
+    p_AmountOfFine IN number,
     p_TerminationConditions IN nvarchar2
 ) as
 begin
@@ -448,7 +451,7 @@ end;
 /
 
 create or replace procedure DeleteContractAgreement (
-    p_ContractNumber IN int
+    p_ContractNumber IN number
 ) as
 begin
     delete from ContractAgreement where ContractNumber = p_ContractNumber;
@@ -456,22 +459,22 @@ end;
 /
 
 create or replace procedure CreateDeal (
-    p_ContractNumber IN int,
-    p_LandlordID IN int,
-    p_TenantID IN int,
+    p_ContractNumber IN number,
+    p_LandlordID IN number,
+    p_TenantID IN number,
     p_DealInformation IN nvarchar2,
-    p_Rating IN int,
-    p_NewDealID OUT int
+    p_Rating IN number,
+    p_NewDealID OUT number
 ) as
 begin
-    insert into Deal (ContractNumber, LandlordID, TenantID, DealInformation, Rating)
+    insert Into Deal (ContractNumber, LandlordID, TenantID, DealInformation, Rating)
     values (p_ContractNumber, p_LandlordID, p_TenantID, p_DealInformation, p_Rating)
-    returning DealID into p_NewDealID;
+    returning DealID Into p_NewDealID;
 end;
 /
 
 create or replace procedure GetDeal (
-    p_DealID IN int
+    p_DealID IN number
 ) as
 begin
     select * from Deal where DealID = p_DealID;
@@ -479,9 +482,9 @@ end;
 /
 
 create or replace procedure UpdateDeal (
-    p_DealID IN int,
+    p_DealID IN number,
     p_DealInformation IN nvarchar2,
-    p_Rating IN int
+    p_Rating IN number
 ) as
 begin
     update Deal
@@ -492,7 +495,7 @@ end;
 /
 
 create or replace procedure DeleteDeal (
-    p_DealID IN int
+    p_DealID IN number
 ) as
 begin
     delete from Deal where DealID = p_DealID;
@@ -500,21 +503,22 @@ end;
 /
 
 create or replace procedure CreateRentalApplication (
-    p_TenantID IN int,
-    p_RoomID IN int,
+    p_TenantID IN number,
+    p_RoomID IN number,
     p_Type IN nvarchar2,
-    p_Status IN boolean,
-    p_NewRentalApplicationID OUT int
-) as
+    p_Status IN number,
+    p_NewRentalApplicationID OUT number
+) is
 begin
-    insert into RentalApplication (TenantID, RoomID, Type, Status)
+    insert into RentalApplication (TenantID, RoomID, "TYPE", Status)
     values (p_TenantID, p_RoomID, p_Type, p_Status)
     returning RentalApplicationID into p_NewRentalApplicationID;
 end;
 /
 
+
 create or replace procedure GetRentalApplication (
-    p_RentalApplicationID IN int
+    p_RentalApplicationID IN number
 ) as
 begin
     select * from RentalApplication where RentalApplicationID = p_RentalApplicationID;
@@ -522,9 +526,9 @@ end;
 /
 
 create or replace procedure UpdateRentalApplication (
-    p_RentalApplicationID IN int,
-    p_Status IN boolean
-) as
+    p_RentalApplicationID IN number,
+    p_Status IN number
+) is
 begin
     update RentalApplication
     set Status = p_Status
@@ -533,7 +537,7 @@ end;
 /
 
 create or replace procedure DeleteRentalApplication (
-    p_RentalApplicationID IN int
+    p_RentalApplicationID IN number
 ) as
 begin
     delete from RentalApplication where RentalApplicationID = p_RentalApplicationID;
@@ -541,3 +545,4 @@ end;
 /
 
 
+commit;
