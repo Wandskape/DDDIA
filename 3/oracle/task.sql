@@ -21,7 +21,7 @@ end GetChildRooms;
 /
 
 begin
-    GetChildRooms(5);
+    GetChildRooms(3);
 end;
 /
 --3
@@ -66,7 +66,7 @@ end MoveChildRooms;
 /
 
 begin
-    MoveChildRooms(1, 3);
+    MoveChildRooms(3, 2);
 end;
 /
 

@@ -10,6 +10,8 @@ begin
 end;
 /
 
+select * from "User";
+
 declare v_landlord_id number;
 begin
     CreateLandlord(1, v_landlord_id);

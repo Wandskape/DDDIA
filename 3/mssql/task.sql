@@ -23,7 +23,7 @@ begin
     select RoomID, Address, Level from RoomHierarchy;
 end;
 
-exec GetChildRooms @RoomID = 3;
+exec GetChildRooms @RoomID = 4;
 
 --3
 create procedure AddChildRoom
@@ -54,7 +54,7 @@ end;
 
 
 exec AddChildRoom
-    @ParentRoomID = 1,
+    @ParentRoomID = 4,
     @Address = N'Подсклад 1.1',
     @TransportHubs = N'Рядом с портом',
     @InfrastructureNear = N'Офисы рядом',
@@ -80,7 +80,7 @@ begin
     where ParentRoomID = @OldParentID;
 end;
 
-exec MoveChildRooms @OldParentID = 1, @NewParentID = 3;
+exec MoveChildRooms @OldParentID = 4, @NewParentID = 5;
 
 
 
